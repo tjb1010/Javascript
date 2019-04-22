@@ -5,3 +5,7 @@
 .card .caption-full p {
   font-weight: 400;
 }
+
+.delete-form {
+  display: inline;
+}
