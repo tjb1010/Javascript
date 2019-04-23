@@ -8,6 +8,9 @@ function Car(year, make, model) {
 Car.prototype.log = function() {
   console.log(this);
 };
+
 var myCar = new Car(2012, "Chevy", "Malibu");
 
 myCar.log();
+
+//test
