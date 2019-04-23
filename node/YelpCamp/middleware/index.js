@@ -8,13 +8,11 @@ var middlewareObj = {
         if (err || !campground) {
           req.flash("error", "Campground couldn't be found...");
           res.redirect("/campgrounds");
+        } else if (campground.author.id.equals(req.user._id)) {
+          next();
         } else {
-          if (campground.author.id.equals(req.user._id)) {
-            next();
-          } else {
-            req.flash("error", "You don't have permission to do that.");
-            res.redirect("back");
-          }
+          req.flash("error", "You don't have permission to do that.");
+          res.redirect("back");
         }
       });
     } else {
@@ -27,13 +25,11 @@ var middlewareObj = {
       Comment.findById(req.params.comment_id, function(err, comment) {
         if (err || !comment) {
           res.redirect("/campgrounds");
+        } else if (comment.author.id.equals(req.user._id)) {
+          next();
         } else {
-          if (comment.author.id.equals(req.user._id)) {
-            next();
-          } else {
-            req.flash("error", "You don't have permission to do that.");
-            res.redirect("back");
-          }
+          req.flash("error", "You don't have permission to do that.");
+          res.redirect("back");
         }
       });
     } else {
