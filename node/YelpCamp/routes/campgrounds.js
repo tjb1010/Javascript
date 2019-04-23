@@ -8,6 +8,7 @@ var middleware = require("../middleware");
 router.get("/", function(req, res) {
   Campground.find({}, function(err, campgrounds) {
     if (err) {
+      req.flash("error", "Something went wrong, please reload the page");
       console.log(err);
     } else {
       res.render("campgrounds/index", { campgrounds: campgrounds });
@@ -32,8 +33,10 @@ router.post("/", middleware.isLoggedIn, function(req, res) {
   };
   Campground.create(newCampground, function(err, campground) {
     if (err) {
-      console.log(err);
+      req.flash("error", "Oops! Something went wrong. Please try again!");
+      res.redirect("/");
     } else {
+      req.flash("success", "Campground created successfully");
       res.redirect("/campgrounds");
     }
   });
@@ -50,7 +53,7 @@ router.get("/:id", function(req, res) {
     .populate("comments")
     .exec(function(err, foundCampground) {
       if (err) {
-        console.log(err);
+        req.flash("error", "Oops! Something went wrong. Please try again!");
       } else {
         res.render("campgrounds/show", { campground: foundCampground });
       }
@@ -70,13 +73,14 @@ router.get("/:id/edit", middleware.checkCampgroundOwnership, function(
 // Update (send edit form as update to a campground)
 router.put("/:id", middleware.checkCampgroundOwnership, function(req, res) {
   Campground.findByIdAndUpdate(req.params.id, req.body.campground, function(
-    err,
-    campground
+    err
   ) {
     if (err) {
-      res.redirect("/campgrounds");
+      req.flash("error", "Oops! Something went wrong. Please try again!");
+      res.redirect("back");
     } else {
-      res.redirect("/campgrounds/" + req.params.id);
+      req.flash("success", "Successfully updated campground info!");
+      res.redirect("/campgrounds");
     }
   });
 });
@@ -85,14 +89,16 @@ router.put("/:id", middleware.checkCampgroundOwnership, function(req, res) {
 router.delete("/:id", middleware.checkCampgroundOwnership, function(req, res) {
   Campground.findByIdAndRemove(req.params.id, function(err, campground) {
     if (err) {
+      req.flash("error", "Oops! Something went wrong. Please try again!");
       res.redirect("/campgrounds");
     } else {
       Comment.deleteMany({ _id: { $in: campground.comments } }, function(err) {
         if (err) {
-          console.log(err);
+          req.flash("error", "Oops! Something went wrong. Please try again!");
         }
-        res.redirect("/campgrounds");
       });
+      req.flash("success", "Campground successfully deleted");
+      res.redirect("/campgrounds");
     }
   });
 });

@@ -9,12 +9,12 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
     />
     <link rel="stylesheet" href="/stylesheets/main.css" />
-    <style>
-      img.card-img-top {
-        height: 200px;
-        width: auto;
-      }
-    </style>
+    <link rel="stylesheet" href="/stylesheets/landing.css" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"
+      type="text/javascript"
+      async
+    ></script>
     <title>YelpCamp</title>
   </head>
   <body>
@@ -55,6 +55,17 @@
           </ul>
         </div>
       </nav>
+      <div class="container">
+        <% if(error && error.length > 0){ %>
+        <div class="alert alert-danger" role="alert">
+          <%= error %>
+        </div>
+        <% } %> <% if(success && success.length > 0){ %>
+        <div class="alert alert-success" role="alert">
+          <%= success %>
+        </div>
+        <% } %>
+      </div>
     </div>
   </body>
 </html>

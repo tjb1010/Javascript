@@ -9,3 +9,8 @@
 .delete-form {
   display: inline;
 }
+
+img.card-img-top {
+  height: 200px;
+  width: auto;
+}
