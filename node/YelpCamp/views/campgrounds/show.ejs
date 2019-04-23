@@ -16,7 +16,7 @@
           <h3 style="display: inline;">
             <a href=""><%= campground.name %></a>
           </h3>
-          <h5 style="float: right;">$9.00/night<h5>
+          <h5 style="float: right;">$<%= campground.price %>/night<h5>
           <p><%= campground.description %></p>
           <p><em>Submitted by: <%= campground.author.username %></em></p>
           <% if(currentUser && campground.author.id.equals(currentUser._id)){ %>
