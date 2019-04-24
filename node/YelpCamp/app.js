@@ -1,26 +1,52 @@
-var bodyParser = require("body-parser"),
+var express = require("express"),
+  app = express(),
+  bodyParser = require("body-parser"),
   mongoose = require("mongoose"),
   passport = require("passport"),
+  cookieParser = require("cookie-parser"),
   LocalStrategy = require("passport-local"),
-  methodOverride = require("method-override"),
   flash = require("connect-flash"),
-  express = require("express"),
-  app = express();
+  Campground = require("./models/campground"),
+  Comment = require("./models/comment"),
+  User = require("./models/user"),
+  session = require("express-session"),
+  seedDB = require("./seeds"),
+  methodOverride = require("method-override");
 
-var campgroundRoutes = require("./routes/campgrounds"),
-  commentRoutes = require("./routes/comments"),
+// configure dotenv
+require("dotenv").config();
+
+//requiring routes
+var commentRoutes = require("./routes/comments"),
+  campgroundRoutes = require("./routes/campgrounds"),
   indexRoutes = require("./routes/index");
 
-var User = require("./models/user");
+// =======================
+// MongoDB/Mongoose Config
+// =======================
+// assign mongoose promise library and connect to database
+mongoose.Promise = global.Promise;
 
-mongoose.connect("mongodb://localhost:27017/yelp_camp", {
-  useNewUrlParser: true
-});
-app.use(bodyParser.urlencoded({ extended: true }));
-app.set("view engine", "ejs");
+const databaseUri =
+  process.env.MONGODB_URI || "mongodb://localhost:27017/yelp_camp";
+
+mongoose
+  .connect(databaseUri, { useNewUrlParser: true })
+  .then(() => console.log(`Database connected`))
+  .catch(err => console.log(`Database connection error: ${err.message}`));
+
+// =================
+// Misc Setup
+// =================
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
-app.use(flash());
+app.use(cookieParser("secret"));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.set("view engine", "ejs");
+//require moment
+app.locals.moment = require("moment");
+
+// seedDB(); //seed the database
 
 // =================
 // Passport Config
@@ -34,6 +60,7 @@ app.use(
   })
 );
 
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
@@ -50,7 +77,7 @@ app.use(function(req, res, next) {
 // =================
 // Routes
 // =================
-app.use(indexRoutes);
+app.use("/", indexRoutes);
 app.use("/campgrounds", campgroundRoutes);
 app.use("/campgrounds/:id/comments", commentRoutes);
 
