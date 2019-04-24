@@ -46,8 +46,6 @@ app.set("view engine", "ejs");
 //require moment
 app.locals.moment = require("moment");
 
-// seedDB(); //seed the database
-
 // =================
 // Passport Config
 // =================
