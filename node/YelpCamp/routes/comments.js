@@ -56,7 +56,7 @@ router.get("/:commentId/edit", isLoggedIn, checkUserComment, function(
   });
 });
 
-router.put("/:commentId", isAdmin, function(req, res) {
+router.put("/:commentId", isLoggedIn, checkUserComment, function(req, res) {
   Comment.findByIdAndUpdate(req.params.commentId, req.body.comment, function(
     err,
     comment

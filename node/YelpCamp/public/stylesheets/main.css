@@ -1,3 +1,7 @@
+nav {
+  border-bottom: solid #f5f5f5 2px;
+}
+
 .card .caption-full {
   padding: 9px;
 }
@@ -26,19 +30,43 @@ body {
   position: absolute;
   bottom: 0;
   width: 100%;
-  /* Set the fixed height of the footer here */
   height: 60px;
-  background-color: #f5f5f5;
+  background-color: #343a40;
 }
 
-.container .text-muted {
-  margin: 20px 0;
+footer div.container {
+  margin: 0 20px;
+  height: 100%;
 }
-#map {
-  height: 400px;
+
+p.text-muted {
+  height: 100%;
   width: 100%;
+  line-height: 60px;
 }
+
 .flex-wrap {
   display: flex;
   flex-wrap: wrap;
+}
+
+.text-center {
+  margin: 0;
+  padding: 10px;
+}
+
+.jumbotron .container {
+  padding: 0;
+}
+
+.whiteText {
+  color: white;
+}
+
+label {
+  color: white;
+}
+
+.card {
+  margin-top: 15px;
 }
