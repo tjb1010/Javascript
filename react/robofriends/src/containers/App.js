@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import SearchBox from '../components/SearchBox';
 import CardList from '../components/CardList';
 import Scroll from '../components/Scroll';
+import Header from '../components/Header';
 import ErrorBoundry from '../components/ErrorBoundry';
 
 import { setSearchField, requestRobots } from '../actions';
@@ -42,7 +43,7 @@ class App extends Component {
       <h1>Loading...</h1>
     ) : (
       <div className="tc">
-        <h1 className="f1">Robofriends</h1>
+        <Header />
         <SearchBox searchChange={onSearch} />
         <Scroll>
           <ErrorBoundry>
