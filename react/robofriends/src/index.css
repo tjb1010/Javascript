@@ -20,6 +20,7 @@ body {
 }
 
 h1 {
+  font-display: swap;
   font-family: 'ZCOOL QingKe HuangYou', cursive;
   color: rgb(247, 146, 100);
 }
