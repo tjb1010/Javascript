@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import SearchBox from '../components/SearchBox';
-import CardList from '../components/CardList';
-import Scroll from '../components/Scroll';
-import Header from '../components/Header';
-import ErrorBoundry from '../components/ErrorBoundry';
-
 import { setSearchField, requestRobots } from '../actions';
+import MainPage from '../components/MainPage';
 
 const mapStateToProps = (state) => {
   return {
@@ -25,33 +20,10 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
+// eslint-disable-next-line react/prefer-stateless-function
 class App extends Component {
-  componentDidMount() {
-    const { onRequestRobots } = this.props;
-    onRequestRobots();
-  }
-
   render() {
-    const {
-      searchField, onSearch, robots, isPending,
-    } = this.props;
-    const filteredRobots = robots.filter((robot) => {
-      return robot.name.toLowerCase().includes(searchField.toLowerCase());
-    });
-
-    return isPending ? (
-      <h1>Loading...</h1>
-    ) : (
-      <div className="tc">
-        <Header />
-        <SearchBox searchChange={onSearch} />
-        <Scroll>
-          <ErrorBoundry>
-            <CardList robots={filteredRobots} />
-          </ErrorBoundry>
-        </Scroll>
-      </div>
-    );
+    return <MainPage {...this.props} />;
   }
 }
 
