@@ -10,6 +10,7 @@ import App from './containers/App';
 import './index.css';
 import 'tachyons';
 
+// testb 
 const logger = createLogger();
 const rootReducer = combineReducers({ searchRobots, requestRobots });
 const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, logger));
