@@ -3,8 +3,9 @@ const { MongoClient, ObjectID } = require('mongodb');
 const connectionURL = 'mongodb://127.0.0.1:27017';
 const databaseName = 'task-manager';
 
-const id = new ObjectID();
-console.log(id);
+// const id = new ObjectID();
+// console.log(id);
+// console.log(id.getTimestamp());
 
 MongoClient.connect(
   connectionURL,
@@ -16,19 +17,29 @@ MongoClient.connect(
 
     const db = client.db(databaseName);
 
-    // db.collection('tasks').insertMany(
-    //   [
-    //     { description: 'vacuum living room', completed: false },
-    //     { description: 'get dog food', completed: true },
-    //     { description: 'cook dinner', completed: false }
-    //   ],
-    //   (error, result) => {
-    //     if (error) {
-    //       return console.log('There was an error inserting tasks');
-    //     }
+    //     db.collection('users')
+    //       .updateOne(
+    //         {
+    //           name: 'Maximilian'
+    //         },
+    //         {
+    //           $inc: { age: 1 }
+    //         }
+    //       )
+    //       .then(result => {
+    //         console.log(result);
+    //       })
+    //       .catch(error => {
+    //         console.log(error);
+    //       });
 
-    //     console.log(result.ops);
-    //   }
-    // );
+    db.collection('tasks')
+      .updateMany({ completed: false }, { $set: { completed: true } })
+      .then(result => {
+        console.log(result.modifiedCount);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 );
