@@ -1,0 +1,14 @@
+{
+  "name": "assignment-part1",
+  "version": "1.0.0",
+  "description": "part 1 of coding assignment",
+  "main": "part1.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tyler Bickford",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^24.8.0"
+  }
+}
