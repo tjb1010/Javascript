@@ -4,7 +4,7 @@
   "description": "bonus assignment",
   "main": "bonus.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --watchAll"
   },
   "author": "Tyler Bickford",
   "license": "ISC",
