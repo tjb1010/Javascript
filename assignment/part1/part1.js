@@ -29,12 +29,12 @@ const convertVanityToNumbers = vanityNumber => {
     if (removeSpecialChars.length !== 10) {
       throw 'Argument must be 10 characters';
     }
-    removeSpecialChars.map(el => {
-      if (nums.includes(el)) {
-        fullNumbers.push(el);
-      } else if (keypadToArray.includes(el)) {
+    removeSpecialChars.map(char => {
+      if (nums.includes(char)) {
+        fullNumbers.push(char);
+      } else if (keypadToArray.includes(char)) {
         for (i = 2; i < 10; i++) {
-          if (keypad[i].includes(el)) {
+          if (keypad[i].includes(char)) {
             fullNumbers.push(i);
           }
         }
@@ -50,8 +50,4 @@ const convertVanityToNumbers = vanityNumber => {
   }
 };
 
-// ! ================================ Remove this
-const test = '365-windows';
-console.log(convertVanityToNumbers(test));
-// ! ==========================================
 module.exports = convertVanityToNumbers;
