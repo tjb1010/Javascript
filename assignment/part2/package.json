@@ -9,6 +9,7 @@
   "author": "Tyler Bickford",
   "license": "ISC",
   "devDependencies": {
+    "@types/jest": "^24.0.15",
     "jest": "^24.8.0"
   }
 }
