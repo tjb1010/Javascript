@@ -29,12 +29,12 @@ const convertVanityToNumbers = vanityNumber => {
     if (removeSpecialChars.length !== 10) {
       throw 'Argument must be 10 characters';
     }
-    removeSpecialChars.map(char => {
-      if (nums.includes(char)) {
-        fullNumbers.push(char);
-      } else if (keypadToArray.includes(char)) {
+    removeSpecialChars.map(el => {
+      if (nums.includes(el)) {
+        fullNumbers.push(el);
+      } else if (keypadToArray.includes(el)) {
         for (i = 2; i < 10; i++) {
-          if (keypad[i].includes(char)) {
+          if (keypad[i].includes(el)) {
             fullNumbers.push(i);
           }
         }
