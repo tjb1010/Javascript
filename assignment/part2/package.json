@@ -4,13 +4,12 @@
   "description": "part 2 of coding assignment",
   "main": "part2.js",
   "scripts": {
-    "test": "jest --watchAll"
+    "test": "jasmine"
   },
   "author": "Tyler Bickford",
   "license": "ISC",
   "devDependencies": {
-    "@types/jest": "^24.0.15",
-    "jest": "^24.8.0"
+    "jasmine": "^3.4.0"
   },
   "dependencies": {
     "typo-js": "^1.0.3"
