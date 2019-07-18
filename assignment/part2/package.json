@@ -13,7 +13,6 @@
     "jest": "^24.8.0"
   },
   "dependencies": {
-    "axios": "^0.19.0",
-    "node-fetch": "^2.6.0"
+    "typo-js": "^1.0.3"
   }
 }

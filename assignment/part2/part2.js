@@ -6,7 +6,7 @@
 
 const checkWord = require('./checkWord');
 
-const vanitySuggestions = num => {
+const vanitySuggestions = async num => {
   const keypad = {
     '0': ['0'],
     '1': ['1'],
@@ -25,7 +25,7 @@ const vanitySuggestions = num => {
     if (numArray.length < 3 || numArray.length > 10) {
       throw 'Argument must be 3-10 numbers';
     }
-    let vanity = [];
+    let options = [];
     const newArr = [];
     numArray.map(el => {
       newArr.push(keypad[el]);
@@ -33,13 +33,17 @@ const vanitySuggestions = num => {
     result = newArr.reduce((a, b) =>
       a.reduce((c, d) => c.concat(b.map(e => [].concat(d, e))), [])
     );
-    return (vanity = result.map(a => a.join('')));
+    options = result.map(a => a.join(''));
+    console.log('options :', options);
+    const vanity = await checkWord(options);
+    console.log(vanity);
+    if (vanity.length === 0) {
+      console.log('No words can be made');
+    }
+    return await vanity;
   } catch (error) {
     console.log(error);
   }
-
-  checkWord();
-  console.log(wordArray);
 };
 
-console.log(vanitySuggestions(23444));
+vanitySuggestions(234);
