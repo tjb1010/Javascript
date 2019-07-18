@@ -44,6 +44,4 @@ const vanitySuggestions = num => {
   }
 };
 
-// vanitySuggestions(4473);
-// console.log(Array.isArray(vanitySuggestions(4473)));
 module.exports = vanitySuggestions;

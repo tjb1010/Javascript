@@ -13,14 +13,9 @@ function checkWord(words) {
         wordArray.push(words[i]);
       }
     }
-    // console.log('wordArray :', wordArray);
-    console.log('wordArray :', Array.isArray(wordArray));
     return wordArray;
   } catch (error) {
     console.log(error);
   }
 }
-
-// console.log(checkWord(['this', 'dfds', 'is', 'aflkdsj', 'a', 'test']));
-// checkWord(['this', 'dfds', 'is', 'aflkdsj', 'a', 'test']);
 module.exports = checkWord;
