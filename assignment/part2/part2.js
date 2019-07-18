@@ -1,12 +1,7 @@
-// In your answer, provide unit tests to confirm your function works.
-
-// ### Bonus
-
-// Use a dictionary lookup to identify and prioritize permutations that are actual words. (/usr/share/dict/words or /usr/dict/words on Linux, or any public dictionary word list, or API of your choice).
-
 const checkWord = require('./checkWord');
 
-const vanitySuggestions = async num => {
+const vanitySuggestions = num => {
+  const numArray = [...num.toString()];
   const keypad = {
     '0': ['0'],
     '1': ['1'],
@@ -20,30 +15,35 @@ const vanitySuggestions = async num => {
     '9': ['w', 'x', 'y', 'z']
   };
 
-  const numArray = [...num.toString()];
   try {
     if (numArray.length < 3 || numArray.length > 10) {
       throw 'Argument must be 3-10 numbers';
     }
     let options = [];
-    const newArr = [];
+    let keysArray = [];
+    // convert each number to corresponding key values
     numArray.map(el => {
-      newArr.push(keypad[el]);
+      keysArray.push(keypad[el]);
     });
-    result = newArr.reduce((a, b) =>
+    // concat arrays in keysArray to discover all possible permutations
+    combinedArray = keysArray.reduce((a, b) =>
       a.reduce((c, d) => c.concat(b.map(e => [].concat(d, e))), [])
     );
-    options = result.map(a => a.join(''));
-    console.log('options :', options);
-    const vanity = await checkWord(options);
-    console.log(vanity);
+    // join individual letters into arrays of strings
+    options = combinedArray.map(a => a.join(''));
+    // check each permutation to see if it spells a word
+
+    const vanity = checkWord(options);
     if (vanity.length === 0) {
       console.log('No words can be made');
     }
-    return await vanity;
+
+    return vanity;
   } catch (error) {
     console.log(error);
   }
 };
 
-vanitySuggestions(234);
+// vanitySuggestions(4473);
+// console.log(Array.isArray(vanitySuggestions(4473)));
+module.exports = vanitySuggestions;
